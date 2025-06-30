@@ -1,0 +1,52 @@
+version: "3.9"
+
+services:
+  generatordata:
+    build:
+      context: .
+      dockerfile: Dockerfile-python  # Especifica el Dockerfile personalizado
+    volumes:
+      - ./generator:/app/generator
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: usuario
+      POSTGRES_PASSWORD: contraseña
+      POSTGRES_DB: nombre_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: maxdn@mail.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - 5050:80
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+  spark:
+    build:
+      context: .
+      dockerfile: Dockerfile-spark 
+    container_name: spark
+    environment:
+      - SPARK_MODE=standalone
+      - SPARK_DAEMON_CLASSPATH=/opt/bitnami/spark/jars/*
+      - HOME=/tmp
+    volumes:
+      - ./spark/app:/app
+      - ./generator/data:/opt/spark/data
+    working_dir: /app
+    depends_on:
+      - postgres
+    command: spark-submit --jars /opt/bitnami/spark/jars/postgresql-42.7.1.jar etl_spark.py
+
+volumes:
+  postgres_data:
+  pgadmin_data:

@@ -1,0 +1,8 @@
+FROM bitnami/spark:latest
+
+# 1. Opción recomendada: Descargar directamente el JDBC
+#RUN curl -o /opt/bitnami/spark/jars/postgresql-42.7.1.jar \
+#    https://jdbc.postgresql.org/download/postgresql-42.7.1.jar
+
+# 2. Alternativa (si prefieres usar tu jar local):
+COPY spark/jars/postgresql-42.7.1.jar /opt/bitnami/spark/jars/
