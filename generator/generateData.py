@@ -1,7 +1,6 @@
 from pathlib import Path
 import random
-import time
-from datetime import datetime
+from datetime import datetime, timedelta
 
 LAT_MIN = -12.10
 LAT_MAX = -11.95
@@ -15,11 +14,12 @@ brands = ["Visa", "MasterCard", "Amex", "Diners"]
 service_types = ["Tarjeta de Credito", "Tarjeta de Debito", "Tarjeta Prepago"]
 currencies = ["USD", "EUR", "PEN"]
 transaction_types = ["Compra", "Retiro de Efectivo", "Consulta de Saldo"]
+start_date = datetime.utcnow()# Fecha de inicio
 
 # Función para generar una trama tipo ISO8583
-def generar_trama_iso8583():
+def generar_trama_iso8583(iso_date):
     return (
-        f"{datetime.utcnow().isoformat()},"
+        f"{iso_date},"
         f"txn_{random.randint(100000000, 999999999)},"
         f"0200,"  # Message Type ID para solicitud financiera
         f"{random.choice(response_codes)},"
@@ -46,8 +46,10 @@ header = "timestamp,transaction_id,mtid,response_code,service_types,institution_
 try:
     with open(log_path, "a", encoding="utf-8") as f:
         f.write(header+ "\n")
-        for _ in range(1000):
-            linea = generar_trama_iso8583()
+        for i in range(1000):
+            new_date = start_date + timedelta(days=i)
+            iso_date = new_date.isoformat()
+            linea = generar_trama_iso8583(iso_date)
             f.write(linea + "\n")
             f.flush()
             print("📝 Trama generada:", linea)

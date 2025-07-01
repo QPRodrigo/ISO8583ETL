@@ -48,10 +48,15 @@ ISO8583ETL
 
 
 ```
-┌───────────┐   ┌───────────┐    ┌─────────────┐ 
-│ Producer  │→→ │ Apache    │ →→ │ PostgreSQL  │
-│ (Python)  │   │ Spark     │    │             │   
-└───────────┘   └───────────┘    └─────────────┘
+┌───────────┐   ┌───────────┐    ┌─────────────┐    ┌──────────┐  
+│ Producer  │→→ │ Apache    │ →→ │ PostgreSQL  │ →→ │ PowerBI  │
+│ (Python)  │   │ Spark     │    │             │    │          │   
+└───────────┘   └───────────┘    └─────────────┘    └──────────┘
 ```
 
 ---
+## 🚀 Power BI
+
+Modelo Estrella - Power BI
+
+![Modelo Estrella en Power BI](./img/ETL-Python.png)
