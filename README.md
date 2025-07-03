@@ -13,6 +13,17 @@
 ✅ Preparado para integrarse con mensajería (Kafka, RabbitMQ, etc.) en futuras versiones
 
 ---
+## 🚀 Power BI
+
+### Dashboard - Power BI
+
+![Modelo Estrella en Power BI](./img/Dashboard-PowerBI.png)
+
+### Modelo Estrella - Power BI
+
+![Modelo Estrella en Power BI](./img/ETL-Python.png)
+
+---
 
 ## 🛠 Tecnologías Usadas
 
@@ -53,10 +64,3 @@ ISO8583ETL
 │ (Python)  │   │ Spark     │    │             │    │          │   
 └───────────┘   └───────────┘    └─────────────┘    └──────────┘
 ```
-
----
-## 🚀 Power BI
-
-Modelo Estrella - Power BI
-
-![Modelo Estrella en Power BI](./img/ETL-Python.png)

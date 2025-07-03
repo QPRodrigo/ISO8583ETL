@@ -6,7 +6,7 @@ PG_HOST = "postgres"  # Nombre del servicio en compose o IP/host
 PG_PORT = "5432"
 PG_USER = "usuario"
 PG_PASSWORD = "contraseña"
-PG_DATABASE = "nombre_db"
+PG_DATABASE = "transacciones_db"
 
 # Configuración Spark
 spark = SparkSession.builder \
@@ -78,7 +78,6 @@ df_ubicacion = df_raw \
     .distinct() \
     .withColumn("ubicacion_id", monotonically_increasing_id())
 
-
 # Tabla de hechos
 df_fact = df_raw \
     .withColumn("fecha", to_date("timestamp")) \
@@ -122,8 +121,9 @@ df_fact_final = df_fact.select(
     col("tipo_transaccion_id"), 
     col("usuario_id"), 
     col("moneda_id"), 
-    col("ubicacion_id"),
     col("amount").alias("monto"),
+    col("response_time_ms").alias("tiempo_respuesta"),    
+    col("ubicacion_id"),
     col("timestamp")
 )
 

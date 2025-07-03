@@ -8,13 +8,13 @@ LON_MIN = -77.15
 LON_MAX = -76.95
 
 # Datos simulados
-response_codes = ["00", "05", "12", "91", "96", "80", "48"]  # ISO8583 response codes
+response_codes = ["00", "05", "12", "91", "96", "80", "48"]
 institutions = ["BCP", "BBVA", "Interbank", "Scotiabank"]
 brands = ["Visa", "MasterCard", "Amex", "Diners"]
 service_types = ["Tarjeta de Credito", "Tarjeta de Debito", "Tarjeta Prepago"]
 currencies = ["USD", "EUR", "PEN"]
 transaction_types = ["Compra", "Retiro de Efectivo", "Consulta de Saldo"]
-start_date = datetime.utcnow()# Fecha de inicio
+start_date = datetime.utcnow()
 
 # Función para generar una trama tipo ISO8583
 def generar_trama_iso8583(iso_date):
